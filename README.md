@@ -1,6 +1,7 @@
 # missing-data-approaches
 ## Investigation of the Performance of Missing Data Approaches Across Propensity Score Matching Methods
-
+### Code Overview
+This program simulates data scenarios and performs four missing data imputation approaches across 5 variations of propensity score matching methods. Then, their performances are compared.
 ### Background
 There have been extensive studies on how to handle missing data in propensity scores. Many discussed the use of inverse probability-weighted estimators while the propensity score matching methods were left unexplored.
 ### Objective
