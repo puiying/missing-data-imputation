@@ -297,19 +297,12 @@ p_set <- c(0.3, 0.6)
 # define missingness rate, p_missing
 p_missing_set <- c(0.1, 0.6)
 
-# # simulate different datasets based on different scenarios
-# data_simulation_table <- tibble(`Senario` = character(),  `Cor Coef`=numeric(), 
-#                                 `Missing Rate (Nominal)`=numeric(), 
-#                                 `Missing Rate X1 (Observed)` = numeric(),
-#                                 `Missing Rate X3 (Observed)` = numeric(),
-#                                 `Sample Size`=numeric(), `Relative Risk (Nominal)` = numeric(),
-#                                 `Prevalance of X3` = numeric(), `Treatment Assignment Rate` = numeric(),
-#                                 `Relative Risk (Obeserved, unadjusted)` = numeric())
-
-counter <- 8
-for (p in c(0.6)){
-  for (n in c(2000)){
-    for (p_missing in c(0.6)){
+# start from counter 1 and simulate different datasets based on different scenarios
+counter <- 1
+for (p in p_set){
+  for (n in n_set){
+    for (p_missing in p_missing_set){
+      # placeholder
       datasets <- data.frame()
       data_match <- data.frame()
       
@@ -409,11 +402,12 @@ for (p in c(0.6)){
           tabmatches[[sim_name]][[i]][[mm]] <- CreateTableOne(vars = var, strata = "Z", data = data_match[(data_match$scenario==sim_name) & (data_match$imputation==i) & (data_match$matching==mm), ], test = FALSE)
         }
       }
-      # counter <- counter + 1
+      counter <- counter + 1
     }
   }
 }
 
+## Performance Analysis
 performance['bias'] <- abs(0 - as.numeric(performance$ATT))
 performance$ATT <- as.numeric(performance$ATT)
 performance$SE <- as.numeric(performance$SE)
